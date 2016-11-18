@@ -12,7 +12,7 @@
 #define LED_8 21
 #define BUT_IN 26
 #define BUT_OUT 19
-#define DELAY_TIME_MS 250
+#define DELAY_TIME_MS 1000
 
 //**** Define Enums ****
 enum{
@@ -27,7 +27,8 @@ enum{
 int lightShowBlink();
 
 int main(){
-	while(1){
+	int continue = 1;
+	while(continue){
 		switch (state){
 			case STARTUP:
 				//Setup
@@ -46,6 +47,7 @@ int main(){
 				digitalWrite(BUT_IN, 1);
 				state = MODE1;
 			case MODE1:
+				printf("IN MODE 1\n");
 				if(lightShowBlink() == 1){
 					state = MODE2;
 				}
@@ -70,9 +72,10 @@ int main(){
 	         	        digitalWrite(LED_7, LOW);
 	         	        digitalWrite(LED_8, LOW);
 				digitalWrite(BUT_IN, 0);
-				return 1; //ends program
+				continue = 0; //ends program
 		}
 	}
+	return 1;
 }
 
 //Blink Loop
